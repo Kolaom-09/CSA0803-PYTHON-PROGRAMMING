@@ -1,0 +1,35 @@
+def subsidy_separate(units, ration, senior):…
+
+
+def subsidy_elif(units, ration, senior):
+    if units <= 100:
+        return "Full Subsidy"
+
+    elif 101 <= units <= 200 and ration:
+        return "Partial Subsidy"
+
+    elif units > 200 and senior:
+        return "Senior Citizen Subsidy"
+
+    else:
+        return "No Subsidy"
+
+
+households = [
+    (100, False, False),
+    (101, True, False),
+    (150, False, False),
+    (200, True, False),
+    (201, False, False),
+    (250, False, True),
+    (300, True, True),
+    (80, True, True)
+]
+
+print("Separate IF Results:")
+for h in households:
+    print(h, subsidy_separate(*h))
+
+print("\nIF-ELIF-ELSE Results:")
+for h in households:
+    print(h, subsidy_elif(*h))
