@@ -1,0 +1,32 @@
+correct_otp = "1234"
+attempts = 0
+success = False
+
+# Predefined input values
+otp_inputs = ["1111", "2222", "1234"]
+index = 0
+
+while attempts < 3:
+
+    otp = otp_inputs[index]
+    index += 1
+
+    print("Enter OTP:", otp)
+
+    if otp == "":
+        print("Blank entry. Try again.")
+        continue
+
+    attempts += 1
+
+    if otp == correct_otp:
+        print("OTP Verified Successfully!")
+        success = True
+        break
+    else:
+        print("Incorrect OTP")
+
+else:
+    print("Account locked for 30 minutes.")
+
+print("Attempts used:", attempts)
