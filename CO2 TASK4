@@ -1,0 +1,66 @@
+import time
+
+items = [f"Item{i}:Rs{i % 50}" for i in range(200_000)]
+
+
+# Method 1: Using +=
+def build_plus(parts):
+    text = ""
+
+    for p in parts:
+        text += p + ";"
+
+    return text
+
+
+# Method 2: Using join()
+def build_join(parts):
+    return "".join(p + ";" for p in parts)
+
+
+# Method 3: Using f-string
+def build_fstring(parts):
+    lines = []
+
+    for i, p in enumerate(parts):
+        lines.append(f"{p};")
+
+    return "".join(lines)
+
+
+# Testing
+a = build_plus(items)
+b = build_join(items)
+c = build_fstring(items)
+
+print("Plus and Join same:", a == b)
+print("Plus and F-string same:", a == c)
+print("Total length:", len(a))
+
+
+# Performance measurement
+def measure(function, data):
+    times = []
+
+    for i in range(3):
+        start = time.perf_counter()
+        function(data)
+        end = time.perf_counter()
+
+        times.append(end - start)
+
+    return sum(times) / len(times)
+
+
+for n in [1000, 10000, 200000]:
+
+    data = items[:n]
+
+    t1 = measure(build_plus, data)
+    t2 = measure(build_join, data)
+    t3 = measure(build_fstring, data)
+
+    print("\nNumber of lines:", n)
+    print("Plus average:", round(t1, 5), "seconds")
+    print("Join average:", round(t2, 5), "seconds")
+    print("F-string average:", round(t3, 5), "seconds")
